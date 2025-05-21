@@ -4,62 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        // Haal betalingen op via facturen van de gebruiker (student)
+        $payments = Payment::whereHas('invoice', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->latest()->get();
+
+        return view('payments.index', compact('payments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('payments.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'invoice_id' => 'required|exists:invoices,id',
+            'date' => 'required|date',
+            'status' => 'required|string|max:255',
+            'is_active' => 'boolean',
+            'note' => 'nullable|string',
+        ]);
+
+        Payment::create($validated);
+
+        return redirect()->route('payments.index')->with('success', 'Betaling succesvol toegevoegd.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Payment $payment)
     {
-        //
+        return view('payments.show', compact('payment'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Payment $payment)
     {
-        //
+        return view('payments.edit', compact('payment'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Payment $payment)
     {
-        //
+        $validated = $request->validate([
+            'date' => 'required|date',
+            'status' => 'required|string|max:255',
+            'is_active' => 'boolean',
+            'note' => 'nullable|string',
+        ]);
+
+        $payment->update($validated);
+
+        return redirect()->route('payments.index')->with('success', 'Betaling bijgewerkt.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+
+        return redirect()->route('payments.index')->with('success', 'Betaling verwijderd.');
     }
 }
