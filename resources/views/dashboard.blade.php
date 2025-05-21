@@ -1,17 +1,39 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@section('content')
+    <div class="max-w-7xl mx-auto py-10">
+        <div class="bg-white shadow rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Welcome, {{ Auth::user()->first_name }}!</h2>
+
+            @role('Owner')
+            <p class="text-gray-700">You're logged in as <strong>Owner</strong>. Manage everything here.</p>
+            @endrole
+
+            @role('Instructor')
+            <p class="text-gray-700">You're logged in as <strong>Instructor</strong>. Check your student progress.</p>
+            @endrole
+
+            @role('Student')
+            <p class="text-gray-700">You're logged in as <strong>Student</strong>. View your lessons and exams here.</p>
+            @endrole
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            @role('Owner')
+            <x-dashboard.card title="Users" icon="users" count="{{ \App\Models\User::count() }}" />
+            <x-dashboard.card title="Instructors" icon="chalkboard-teacher" count="{{ \App\Models\Instructor::count() }}" />
+            <x-dashboard.card title="Students" icon="user-graduate" count="{{ \App\Models\Student::count() }}" />
+            @endrole
+
+            @role('Instructor')
+            <x-dashboard.card title="Scheduled Lessons" icon="car" count="5" />
+            <x-dashboard.card title="Assigned Students" icon="user" count="12" />
+            @endrole
+
+            @role('Student')
+            <x-dashboard.card title="Upcoming Lessons" icon="calendar" count="2" />
+            <x-dashboard.card title="Exam Attempts" icon="file-alt" count="1" />
+            @endrole
         </div>
     </div>
-</x-app-layout>
+@endsection

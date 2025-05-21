@@ -13,9 +13,9 @@ class Exam extends Model
 
     protected $casts = [
         'start_date' => 'date',
-        'start_time' => 'time',
+        // 'start_time' => 'time', ❌ Laravel doesn't support this
         'end_date' => 'date',
-        'end_time' => 'time',
+        // 'end_time' => 'time', ❌ Laravel doesn't support this
         'is_active' => 'boolean',
     ];
 
@@ -27,5 +27,16 @@ class Exam extends Model
     public function instructor()
     {
         return $this->belongsTo(Instructor::class);
+    }
+
+    // Optional accessors (if you want Carbon for time fields)
+    public function getStartTimeAttribute($value)
+    {
+        return \Carbon\Carbon::createFromFormat('H:i:s', $value);
+    }
+
+    public function getEndTimeAttribute($value)
+    {
+        return \Carbon\Carbon::createFromFormat('H:i:s', $value);
     }
 }

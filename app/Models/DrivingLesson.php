@@ -14,9 +14,7 @@ class DrivingLesson extends Model
 
     protected $casts = [
         'start_date' => 'date',
-        'start_time' => 'time',
         'end_date' => 'date',
-        'end_time' => 'time',
         'is_active' => 'boolean',
     ];
 

@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $fillable = [
         'first_name', 'middle_name', 'last_name', 'birth_date',
-        'username', 'password', 'is_logged_in', 'logged_in_at',
+        'username', 'email', 'password', 'is_logged_in', 'logged_in_at',
         'logged_out_at', 'is_active', 'note',
     ];
 

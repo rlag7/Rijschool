@@ -10,16 +10,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-
-
         $john = User::create([
             'first_name' => 'John',
             'middle_name' => '',
             'last_name' => 'Doe',
             'birth_date' => '1990-01-01',
             'username' => 'john.doe',
+            'email' => 'john@example.com',
             'password' => bcrypt('password'),
-
             'is_logged_in' => false,
             'logged_in_at' => null,
             'logged_out_at' => null,
@@ -34,6 +32,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Dijk',
             'birth_date' => '1995-05-15',
             'username' => 'jane.dijk',
+            'email' => 'jane@example.com',
             'password' => bcrypt('secret'),
             'is_logged_in' => false,
             'logged_in_at' => null,
@@ -43,13 +42,13 @@ class UserSeeder extends Seeder
         ]);
         $jane->assignRole('Student');
 
-
         $mark = User::create([
             'first_name' => 'Mark',
             'middle_name' => '',
             'last_name' => 'Smith',
             'birth_date' => '1985-10-20',
             'username' => 'mark.smith',
+            'email' => 'mark@example.com',
             'password' => bcrypt('password123'),
             'is_logged_in' => false,
             'logged_in_at' => null,
