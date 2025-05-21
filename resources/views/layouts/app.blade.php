@@ -33,5 +33,34 @@
     </main>
 
 </div>
+<footer class="bg-[#002E5B] text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-3 text-center md:text-left">
+        <div>
+            <h3 class="text-lg font-bold mb-2">Vierkante Wielen</h3>
+            <p class="text-sm">Dé rijschool voor jongeren met een fysieke beperking.</p>
+        </div>
+        <div>
+            <h4 class="font-semibold mb-2">Navigatie</h4>
+            <ul class="space-y-1 text-sm">
+                <li><a href="/" class="hover:underline">Home</a></li>
+                <li><a href="#diensten" class="hover:underline">Diensten</a></li>
+                <li><a href="#inschrijven" class="hover:underline">Inschrijven</a></li>
+                <li><a href="#contact" class="hover:underline">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-semibold mb-2">Contactgegevens</h4>
+            <ul class="text-sm space-y-1">
+                <li>Email: info@vierkantewielen.nl</li>
+                <li>Telefoon: 06-12345678</li>
+                <li>Adres: Rijschoolstraat 1, 1234 AB Utrecht</li>
+            </ul>
+        </div>
+    </div>
+    <div class="bg-[#001F3F] text-center py-4 text-sm text-gray-300">
+        © {{ now()->year }} Rijschool Vierkante Wielen. Alle rechten voorbehouden.
+    </div>
+</footer>
+
 </body>
 </html>
