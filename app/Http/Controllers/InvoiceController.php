@@ -12,8 +12,13 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::with('registration.user') // assuming registration belongs to a user (leerling/instructeur)
+        ->orderBy('invoice_date', 'desc')
+            ->get();
+
+        return view('invoices.index', compact('invoices'));
     }
+
 
     /**
      * Show the form for creating a new resource.

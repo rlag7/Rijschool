@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
+
+
         $john = User::create([
             'first_name' => 'John',
             'middle_name' => '',
@@ -16,6 +19,7 @@ class UserSeeder extends Seeder
             'birth_date' => '1990-01-01',
             'username' => 'john.doe',
             'password' => bcrypt('password'),
+
             'is_logged_in' => false,
             'logged_in_at' => null,
             'logged_out_at' => null,
@@ -38,6 +42,7 @@ class UserSeeder extends Seeder
             'note' => 'Test user 2',
         ]);
         $jane->assignRole('Student');
+
 
         $mark = User::create([
             'first_name' => 'Mark',

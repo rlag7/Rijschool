@@ -19,6 +19,14 @@ class Invoice extends Model
         'is_active' => 'boolean',
     ];
 
+
+    //role
+    public function user()
+    {
+        return $this->belongsTo(User::class); // of Student/Instructeur
+    }
+    // ^^^^
+
     public function registration()
     {
         return $this->belongsTo(Registration::class);
