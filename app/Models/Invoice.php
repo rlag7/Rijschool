@@ -23,7 +23,14 @@ class Invoice extends Model
     //role
     public function user()
     {
-        return $this->belongsTo(User::class); // of Student/Instructeur
+        return $this->hasOneThrough(
+            User::class,
+            Registration::class,
+            'id',         // Foreign key on Registration table...
+            'id',         // Foreign key on User table...
+            'registration_id', // Local key on Invoice table...
+            'user_id'         // Local key on Registration table...
+        );
     }
     // ^^^^
 

@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -27,5 +28,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+Route::middleware(['auth', 'role:Student'])->group(function () {
+    Route::resource('payments', PaymentController::class);
+});
+
+
+Route::middleware(['auth', 'role:Instructor'])->group(function () {
+
+});
+
+
+Route::middleware(['auth', 'role:Owner'])->group(function () {
+
+});
 
 require __DIR__.'/auth.php';

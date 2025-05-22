@@ -33,6 +33,7 @@
             @role('Student')
             <x-dashboard.card title="Upcoming Lessons" icon="calendar" count="2" />
             <x-dashboard.card title="Exam Attempts" icon="file-alt" count="1" />
+            <x-dashboard-link route="payments.index" label="Manage Payments" />
             @endrole
         </div>
     </div>
