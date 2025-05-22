@@ -3,6 +3,8 @@
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,9 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// invoices
+// invoices & instructors & students
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
 });
@@ -40,7 +43,8 @@ Route::middleware(['auth', 'role:Instructor'])->group(function () {
 
 
 Route::middleware(['auth', 'role:Owner'])->group(function () {
-
+    Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/instructors', [InstructorController::class, 'index'])->name('instructors.index');
 });
 
 require __DIR__.'/auth.php';

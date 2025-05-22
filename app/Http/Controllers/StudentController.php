@@ -12,8 +12,17 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = \App\Models\Student::with([
+            'user',
+            'registrations.drivingLessons',
+            'registrations.exams',
+            'registrations.instructor.user',
+        ])->orderBy('reference_number')->get();
+
+        return view('students.index', compact('students'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

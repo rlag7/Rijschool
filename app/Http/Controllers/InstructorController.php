@@ -12,8 +12,11 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        //
+        $instructors = Instructor::with('user', 'drivingLessons')->orderBy('number')->get();
+        return view('instructors.index', compact('instructors'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

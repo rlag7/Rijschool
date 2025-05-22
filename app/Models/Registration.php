@@ -46,4 +46,16 @@ class Registration extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function instructor()
+    {
+        return $this->hasOneThrough(
+            \App\Models\Instructor::class,
+            \App\Models\Exam::class,
+            'registration_id', // Foreign key on exams table
+            'id',              // Local key on instructors table
+            'id',              // Local key on registrations table
+            'instructor_id'    // Foreign key on exams table
+        );
+    }
 }

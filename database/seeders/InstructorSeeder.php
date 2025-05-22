@@ -10,7 +10,8 @@ class InstructorSeeder extends Seeder
 {
     public function run(): void
     {
-        $instructors = User::role('Instructor')->get();
+        // Get only 5 users with the 'Instructor' role
+        $instructors = User::role('Instructor')->take(5)->get();
 
         foreach ($instructors as $user) {
             Instructor::create([

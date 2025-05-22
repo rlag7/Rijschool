@@ -26,6 +26,12 @@ class User extends Authenticatable
         'logged_out_at' => 'datetime',
     ];
 
+
+    public function getFullNameAttribute()
+    {
+        return trim("{$this->first_name} {$this->middle_name} {$this->last_name}");
+    }
+
     // Relations
     public function contacts()
     {

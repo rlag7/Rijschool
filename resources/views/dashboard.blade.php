@@ -23,18 +23,23 @@
             <x-dashboard.card title="Users" icon="users" count="{{ \App\Models\User::count() }}" />
             <x-dashboard.card title="Instructors" icon="chalkboard-teacher" count="{{ \App\Models\Instructor::count() }}" />
             <x-dashboard.card title="Students" icon="user-graduate" count="{{ \App\Models\Student::count() }}" />
+            <x-dashboard-link route="students.index" label="Manage Students" />
+            <x-dashboard-link route="instructors.index" label="Manage Instructors" />
             @endrole
 
             @role('Instructor')
             <x-dashboard.card title="Scheduled Lessons" icon="car" count="5" />
             <x-dashboard.card title="Assigned Students" icon="user" count="12" />
+            <x-dashboard-link route="payments.index" label="Manage Payments" />
+
             @endrole
 
             @role('Student')
             <x-dashboard.card title="Upcoming Lessons" icon="calendar" count="2" />
             <x-dashboard.card title="Exam Attempts" icon="file-alt" count="1" />
-            <x-dashboard-link route="payments.index" label="Manage Payments" />
+            <x-dashboard-link route="invoices.index" label="Manage Invoices" />
             @endrole
         </div>
+
     </div>
 @endsection
