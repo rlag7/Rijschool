@@ -26,8 +26,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
-    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+
 });
 
 
@@ -38,7 +37,8 @@ Route::middleware(['auth', 'role:Student'])->group(function () {
 
 
 Route::middleware(['auth', 'role:Instructor'])->group(function () {
-
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
 });
 
 

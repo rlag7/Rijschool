@@ -16,7 +16,7 @@ class InvoiceController extends Controller
 
         $invoices = [];
 
-        if ($user->hasRole('Owner')) {
+        if ($user->hasRole('Instructor')) {
             $invoices = Invoice::with('registration.user')
                 ->orderBy('invoice_date', 'desc')
                 ->get();

@@ -4,7 +4,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <h1 class="text-2xl font-semibold text-gray-800 mb-6">Overzicht Leerlingen</h1>
 
-        @if($students->isEmpty())
+        @if (!empty($error))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 shadow" role="alert">
+                <strong class="font-bold">Fout:</strong>
+                <span class="block sm:inline">{{ $error }}</span>
+            </div>
+        @elseif ($students->isEmpty())
             <div class="bg-blue-100 border border-blue-300 text-blue-800 px-4 py-3 rounded">
                 Er zijn momenteel geen leerlingen geregistreerd.
             </div>

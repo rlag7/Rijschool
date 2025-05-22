@@ -30,14 +30,13 @@
             @role('Instructor')
             <x-dashboard.card title="Scheduled Lessons" icon="car" count="5" />
             <x-dashboard.card title="Assigned Students" icon="user" count="12" />
-            <x-dashboard-link route="payments.index" label="Manage Payments" />
-
+            <x-dashboard-link route="invoices.index" label="Manage Invoices" />
             @endrole
 
             @role('Student')
             <x-dashboard.card title="Upcoming Lessons" icon="calendar" count="2" />
             <x-dashboard.card title="Exam Attempts" icon="file-alt" count="1" />
-            <x-dashboard-link route="invoices.index" label="Manage Invoices" />
+            <x-dashboard-link route="payments.index" label="Manage Payments" />
             @endrole
         </div>
 

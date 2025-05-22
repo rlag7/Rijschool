@@ -12,14 +12,23 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = \App\Models\Student::with([
-            'user',
-            'registrations.drivingLessons',
-            'registrations.exams',
-            'registrations.instructor.user',
-        ])->orderBy('reference_number')->get();
+        try {
+            $students = Student::with('user', 'registrations.drivingLessons', 'registrations.instructor.user', 'registrations.exams')->get();
 
-        return view('students.index', compact('students'));
+            if ($students->isEmpty()) {
+                // Pass empty collection or null explicitly to view
+                return view('students.index', ['students' => collect()]);
+            }
+
+            return view('students.index', ['students' => $students]);
+
+        } catch (\Exception $e) {
+            // Pass an error message or empty collection so the view can handle it gracefully
+            return view('students.index', [
+                'students' => collect(),
+                'error' => 'Er is een fout opgetreden bij het laden van de leerlingen: ' . $e->getMessage()
+            ]);
+        }
     }
 
 
