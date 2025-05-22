@@ -19,9 +19,9 @@
                 <table class="min-w-full table-auto">
                     <thead class="bg-blue-600 text-white text-sm">
                     <tr>
-                        <th class="px-6 py-4 text-left">Titel</th>
+                        <th class="px-6 py-4 text-left">Doelgroep</th>
                         <th class="px-6 py-4 text-left">Bericht</th>
-                        <th class="px-6 py-4 text-left">Verstuurd Op</th>
+                        <th class="px-6 py-4 text-left">Datum</th>
                         <th class="px-6 py-4 text-left">Status</th>
                         <th class="px-6 py-4 text-left">Acties</th>
                     </tr>
@@ -29,10 +29,10 @@
                     <tbody class="text-gray-700">
                     @foreach($notifications as $notification)
                         <tr class="border-t hover:bg-gray-50">
-                            <td class="px-6 py-4">{{ $notification->title }}</td>
+                            <td class="px-6 py-4">{{ $notification->target_group }}</td>
                             <td class="px-6 py-4">{{ Str::limit($notification->message, 50) }}</td>
-                            <td class="px-6 py-4">{{ $notification->sent_at ? $notification->sent_at->format('d-m-Y H:i') : '-' }}</td>
-                            <td class="px-6 py-4">{{ $notification->status }}</td>
+                            <td class="px-6 py-4">{{ \Carbon\Carbon::parse($notification->date)->format('d-m-Y') }}</td>
+                            <td class="px-6 py-4">{{ $notification->is_active ? 'Actief' : 'Inactief' }}</td>
                             <td class="px-6 py-4 space-x-2 whitespace-nowrap">
                                 <a href="{{ route('notifications.show', $notification) }}" class="text-blue-600 hover:text-blue-800">Bekijk</a>
                                 <a href="{{ route('notifications.edit', $notification) }}" class="text-yellow-600 hover:text-yellow-800">Bewerk</a>

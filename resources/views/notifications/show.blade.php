@@ -9,20 +9,24 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <table class="w-full text-gray-700">
                 <tr class="border-b">
-                    <th class="py-2 text-left font-semibold">Titel</th>
-                    <td class="py-2">{{ $notification->title }}</td>
+                    <th class="py-2 text-left font-semibold">Type</th>
+                    <td class="py-2">{{ $notification->notification_type }}</td>
                 </tr>
                 <tr class="border-b">
                     <th class="py-2 text-left font-semibold">Bericht</th>
                     <td class="py-2">{{ $notification->message }}</td>
                 </tr>
                 <tr class="border-b">
-                    <th class="py-2 text-left font-semibold">Status</th>
-                    <td class="py-2">{{ $notification->status }}</td>
+                    <th class="py-2 text-left font-semibold">Doelgroep</th>
+                    <td class="py-2">{{ $notification->target_group }}</td>
+                </tr>
+                <tr class="border-b">
+                    <th class="py-2 text-left font-semibold">Datum</th>
+                    <td class="py-2">{{ \Carbon\Carbon::parse($notification->date)->format('d-m-Y') }}</td>
                 </tr>
                 <tr>
-                    <th class="py-2 text-left font-semibold">Verstuurd Op</th>
-                    <td class="py-2">{{ $notification->sent_at ? $notification->sent_at->format('d-m-Y H:i') : '-' }}</td>
+                    <th class="py-2 text-left font-semibold">Status</th>
+                    <td class="py-2">{{ $notification->is_active ? 'Actief' : 'Inactief' }}</td>
                 </tr>
             </table>
 
