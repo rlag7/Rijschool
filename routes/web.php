@@ -4,6 +4,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,7 +20,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // invoices
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+});
+
 
 
 require __DIR__.'/auth.php';

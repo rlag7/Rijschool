@@ -16,6 +16,12 @@ class Registration extends Model
         'is_active' => 'boolean',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+
     public function student()
     {
         return $this->belongsTo(Student::class);

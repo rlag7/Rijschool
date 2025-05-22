@@ -12,12 +12,24 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with('registration.user') // assuming registration belongs to a user (leerling/instructeur)
-        ->orderBy('invoice_date', 'desc')
-            ->get();
+        $user = auth()->user();
+
+        $invoices = [];
+
+        if ($user->hasRole('Owner')) {
+            $invoices = Invoice::with('registration.user')
+                ->orderBy('invoice_date', 'desc')
+                ->get();
+        } elseif ($user->hasRole('Instructor') || $user->hasRole('Student')) {
+            $invoices = Invoice::whereHas('registration.user', function ($q) use ($user) {
+                $q->where('id', $user->id);
+            })->with('registration.user')->get();
+        }
 
         return view('invoices.index', compact('invoices'));
     }
+
+
 
 
     /**
