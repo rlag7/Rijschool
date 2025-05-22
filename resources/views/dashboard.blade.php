@@ -31,6 +31,7 @@
             <x-dashboard.card title="Scheduled Lessons" icon="car" count="5" />
             <x-dashboard.card title="Assigned Students" icon="user" count="12" />
             <x-dashboard-link route="invoices.index" label="Manage Invoices" />
+            <x-dashboard-link route="notifications.index" label="Manage Notifications" />
             @endrole
 
             @role('Student')

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\InstructorController;
@@ -39,6 +40,8 @@ Route::middleware(['auth', 'role:Student'])->group(function () {
 Route::middleware(['auth', 'role:Instructor'])->group(function () {
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+    Route::resource('notifications', NotificationController::class);
+
 });
 
 
