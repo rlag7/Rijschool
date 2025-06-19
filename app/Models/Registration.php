@@ -58,4 +58,6 @@ class Registration extends Model
             'instructor_id'    // Foreign key on exams table
         );
     }
+
+
 }

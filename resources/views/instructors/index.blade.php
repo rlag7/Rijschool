@@ -56,10 +56,17 @@
                                 {{ $instructor->note ?? 'Onbekend' }}
                             </td>
                             <td class="px-4 py-3">
-                                {{-- Actions can go here --}}
+                                <button class="accent-green-400" type="submit">Wijzig</button>
                             </td>
                         </tr>
                     @endforeach
+                    <div class="mb-4">
+                        <a href="{{ route('instructors.create') }}"
+                           class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                            + Nieuwe Instructeur Toevoegen
+                        </a>
+                    </div>
+
                     </tbody>
                 </table>
             </div>

@@ -39,15 +39,20 @@ Route::middleware(['auth', 'role:Student'])->group(function () {
 
 Route::middleware(['auth', 'role:Instructor'])->group(function () {
     Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create'); // Move this up
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
     Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
     Route::resource('notifications', NotificationController::class);
-
 });
+
 
 
 Route::middleware(['auth', 'role:Owner'])->group(function () {
     Route::get('/students', [StudentController::class, 'index'])->name('students.index');
     Route::get('/instructors', [InstructorController::class, 'index'])->name('instructors.index');
+    Route::get('/instructors/create', [InstructorController::class, 'create'])->name('instructors.create');
+    Route::post('/instructors', [InstructorController::class, 'store'])->name('instructors.store');
+
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,10 @@
 @section('content')
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 class="text-2xl font-semibold text-gray-800 mb-6">Overzicht facturen</h1>
+        <a href="{{ route('invoices.create') }}"
+           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-200">
+            Nieuwe factuur
+        </a>
 
         @if($invoices->isEmpty())
             <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded flex items-center space-x-2" role="alert">
@@ -28,7 +32,8 @@
                     @foreach($invoices as $invoice)
                         <tr>
                             <td class="px-4 py-3 text-sm text-gray-900">{{ $invoice->invoice_number }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-900">{{ optional($invoice->registration->user)->name ?? 'Onbekend' }}</td>
+                            <td class="px-4 py-3 text-sm text-gray-900">{{ optional($invoice->registration->student->user)->full_name ?? 'Onbekend' }}
+                            </td>
                             <td class="px-4 py-3 text-sm text-gray-900">{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                             <td class="px-4 py-3 text-sm text-gray-900">€ {{ number_format($invoice->amount_incl_vat, 2, ',', '.') }}</td>
                             <td class="px-4 py-3">
@@ -56,7 +61,9 @@
                     @endforeach
                     </tbody>
                 </table>
+
             </div>
         @endif
     </div>
+
 @endsection
